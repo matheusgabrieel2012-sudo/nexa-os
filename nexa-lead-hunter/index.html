@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NEXA OS</title>
+
+    <meta name="theme-color" content="#07070a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div id="toastContainer"></div>
+
+<!-- LOGIN -->
+<section id="loginScreen" class="login-screen">
+
+    <div class="login-glow"></div>
+
+    <div class="login-card">
+
+        <div class="brand-big">
+            NEXA<span>.</span>
+        </div>
+
+        <div class="login-symbol">◈</div>
+
+        <h1>Bem-vindo ao NEXA OS</h1>
+
+        <p>
+            Plataforma operacional da equipe NEXA.
+        </p>
+
+        <label>Quem está entrando?</label>
+
+        <select id="loginUser">
+            <option value="Matheus ADM">Matheus ADM</option>
+            <option value="Arthur Rodrigues">Arthur Rodrigues</option>
+            <option value="Pietro de Jesus">Pietro de Jesus</option>
+        </select>
+
+        <div id="passwordBox">
+            <label>Senha administrativa</label>
+
+            <input
+                type="password"
+                id="loginPassword"
+                placeholder="Digite a senha"
+            >
+        </div>
+
+        <button id="loginBtn" class="primary-btn">
+            Entrar no NEXA →
+        </button>
+
+        <small>
+            Sistema interno • NEXA OS
+        </small>
+
+    </div>
+
+</section>
+
+
+<!-- APP -->
+<div id="app" class="app hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            NEXA<span>.</span>
+        </div>
+
+        <div class="sidebar-user">
+            <div id="userAvatar" class="avatar">M</div>
+
+            <div>
+                <strong id="sidebarUserName">Matheus ADM</strong>
+                <span id="sidebarUserRole">Administrador</span>
+            </div>
+        </div>
+
+        <nav>
+
+            <button class="nav-item active" data-page="dashboard">
+                <span>⌂</span>
+                Dashboard
+            </button>
+
+            <button class="nav-item" data-page="leads">
+                <span>⌕</span>
+                Lead Hunter
+            </button>
+
+            <button class="nav-item" data-page="crm">
+                <span>◉</span>
+                CRM
+            </button>
+
+            <button class="nav-item" data-page="tasks">
+                <span>✓</span>
+                Tarefas
+            </button>
+
+            <button class="nav-item" data-page="goals">
+                <span>◎</span>
+                Metas
+            </button>
+
+            <button class="nav-item" data-page="ranking">
+                <span>♛</span>
+                Ranking
+            </button>
+
+            <button class="nav-item" data-page="team">
+                <span>♙</span>
+                Equipe
+            </button>
+
+            <button class="nav-item" data-page="ai">
+                <span>✦</span>
+                NEXA AI
+            </button>
+
+            <button class="nav-item admin-only" data-page="admin">
+                <span>⚙</span>
+                Painel ADM
+            </button>
+
+        </nav>
+
+        <div class="sidebar-bottom">
+
+            <button id="notificationPermissionBtn" class="side-action">
+                🔔 Ativar notificações
+            </button>
+
+            <button id="logoutBtn" class="side-action danger">
+                ↪ Sair
+            </button>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN -->
+    <main class="main">
+
+        <header class="topbar">
+
+            <div>
+                <div class="mobile-brand">
+                    NEXA<span>.</span>
+                </div>
+
+                <span class="topbar-date" id="currentDate"></span>
+            </div>
+
+            <div class="topbar-actions">
+
+                <button id="soundBtn" class="icon-btn" title="Som">
+                    🔊
+                </button>
+
+                <button id="notificationBtn" class="notification-btn">
+                    🔔
+                    <span id="notificationCount">0</span>
+                </button>
+
+                <div class="top-user">
+                    <div id="topAvatar" class="avatar small">M</div>
+                    <span id="topUserName">Matheus ADM</span>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- DASHBOARD -->
+        <section id="page-dashboard" class="page active-page">
+
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">VISÃO GERAL</span>
+                    <h1>Olá, <span id="welcomeName">Matheus</span> 👋</h1>
+                    <p>Acompanhe a operação da NEXA em um só lugar.</p>
+                </div>
+
+                <button class="primary-btn" data-page-action="leads">
+                    + Encontrar leads
+                </button>
+            </div>
+
+
+            <div class="metrics-grid">
+
+                <div class="metric-card">
+                    <span>Leads encontrados</span>
+                    <strong id="metricLeads">0</strong>
+                    <small>total no sistema</small>
+                </div>
+
+                <div class="metric-card">
+                    <span>Leads contatados</span>
+                    <strong id="metricContacted">0</strong>
+                    <small>em prospecção</small>
+                </div>
+
+                <div class="metric-card">
+                    <span>Negociações</span>
+                    <strong id="metricNegotiation">0</strong>
+                    <small>oportunidades abertas</small>
+                </div>
+
+                <div class="metric-card highlight-card">
+                    <span>Clientes fechados</span>
+                    <strong id="metricWon">0</strong>
+                    <small>vendas realizadas</small>
+                </div>
+
+            </div>
+
+
+            <div class="dashboard-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <span class="eyebrow">META</span>
+                            <h2>Meta da equipe</h2>
+                        </div>
+
+                        <button class="ghost-btn" data-page-action="goals">
+                            Ver metas
+                        </button>
+                    </div>
+
+                    <div class="goal-big">
+
+                        <div class="goal-number">
+                            <strong id="teamGoalPercent">0%</strong>
+                            <span>concluído</span>
+                        </div>
+
+                        <div class="progress">
+                            <div id="teamGoalProgress" class="progress-bar"></div>
+                        </div>
+
+                        <div class="goal-values">
+                            <span id="teamGoalCurrent">R$ 0</span>
+                            <span id="teamGoalTarget">R$ 5.000</span>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <span class="eyebrow">PRODUTIVIDADE</span>
+                            <h2>Equipe</h2>
+                        </div>
+
+                        <button class="ghost-btn" data-page-action="team">
+                            Equipe
+                        </button>
+                    </div>
+
+                    <div id="teamMiniList"></div>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <span class="eyebrow">ATIVIDADE</span>
+                        <h2>Atividade recente</h2>
+                    </div>
+                </div>
+
+                <div id="activityList" class="activity-list"></div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LEAD HUNTER -->
+        <section id="page-leads" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">PROSPECÇÃO</span>
+                    <h1>Lead Hunter</h1>
+                    <p>Encontre empresas e transforme oportunidades em clientes.</p>
+                </div>
+
+            </div>
+
+
+            <div class="search-panel">
+
+                <div class="field">
+                    <label>Nicho</label>
+                    <input id="nicho" placeholder="Ex: barbearia">
+                </div>
+
+                <div class="field">
+                    <label>Localização</label>
+                    <input id="localizacao" placeholder="Ex: São Paulo, SP">
+                </div>
+
+                <div class="field quantity">
+                    <label>Quantidade</label>
+                    <input id="quantidade" type="number" min="1" max="20" value="20">
+                </div>
+
+                <button id="buscarBtn" class="primary-btn">
+                    🔎 Buscar
+                </button>
+
+            </div>
+
+
+            <div class="lead-stats">
+
+                <div>
+                    <span>Encontrados</span>
+                    <strong id="totalLeads">0</strong>
+                </div>
+
+                <div>
+                    <span>Sem site</span>
+                    <strong id="semSite">0</strong>
+                </div>
+
+                <div>
+                    <span>Alto potencial</span>
+                    <strong id="altoPotencial">0</strong>
+                </div>
+
+                <div>
+                    <span>Score médio</span>
+                    <strong id="scoreMedio">0</strong>
+                </div>
+
+            </div>
+
+
+            <div class="results-header">
+                <div>
+                    <span class="eyebrow">RESULTADOS</span>
+                    <h2>Leads encontrados</h2>
+                </div>
+            </div>
+
+            <div id="leadsContainer" class="leads-grid">
+
+                <div class="empty-state">
+                    <div>⌕</div>
+                    <h3>Nenhuma busca realizada</h3>
+                    <p>Pesquise um nicho e uma localização.</p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CRM -->
+        <section id="page-crm" class="page">
+
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">VENDAS</span>
+                    <h1>CRM</h1>
+                    <p>Controle suas oportunidades comerciais.</p>
+                </div>
+            </div>
+
+            <div class="crm-board" id="crmBoard"></div>
+
+        </section>
+
+
+        <!-- TASKS -->
+        <section id="page-tasks" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">OPERAÇÃO</span>
+                    <h1>Tarefas</h1>
+                    <p>Organize o trabalho da equipe.</p>
+                </div>
+
+                <button id="newTaskBtn" class="primary-btn admin-action">
+                    + Nova tarefa
+                </button>
+
+            </div>
+
+            <div class="task-filters">
+
+                <button class="filter-btn active" data-task-filter="all">
+                    Todas
+                </button>
+
+                <button class="filter-btn" data-task-filter="pending">
+                    Pendentes
+                </button>
+
+                <button class="filter-btn" data-task-filter="completed">
+                    Concluídas
+                </button>
+
+            </div>
+
+            <div id="tasksList" class="tasks-list"></div>
+
+        </section>
+
+
+        <!-- GOALS -->
+        <section id="page-goals" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">PERFORMANCE</span>
+                    <h1>Metas</h1>
+                    <p>Defina e acompanhe objetivos.</p>
+                </div>
+
+                <button id="editGoalBtn" class="primary-btn admin-action">
+                    ⚙ Editar meta
+                </button>
+
+            </div>
+
+            <div id="goalsContainer" class="goals-grid"></div>
+
+        </section>
+
+
+        <!-- RANKING -->
+        <section id="page-ranking" class="page">
+
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">PERFORMANCE</span>
+                    <h1>Ranking</h1>
+                    <p>Veja quem está puxando a operação.</p>
+                </div>
+            </div>
+
+            <div id="rankingContainer" class="ranking-list"></div>
+
+        </section>
+
+
+        <!-- TEAM -->
+        <section id="page-team" class="page">
+
+            <div class="page-heading">
+                <div>
+                    <span class="eyebrow">EQUIPE</span>
+                    <h1>Equipe NEXA</h1>
+                    <p>Acompanhe os membros da operação.</p>
+                </div>
+            </div>
+
+            <div id="teamContainer" class="team-grid"></div>
+
+        </section>
+
+
+        <!-- AI -->
+        <section id="page-ai" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">INTELIGÊNCIA</span>
+                    <h1>NEXA AI</h1>
+                    <p>Seu assistente comercial.</p>
+                </div>
+
+            </div>
+
+            <div class="ai-panel">
+
+                <div class="ai-header">
+                    <div class="ai-orb">✦</div>
+
+                    <div>
+                        <strong>NEXA AI</strong>
+                        <span>Assistente comercial</span>
+                    </div>
+                </div>
+
+                <div id="aiMessages" class="ai-messages">
+
+                    <div class="ai-message">
+                        Olá! Eu sou a NEXA AI. Posso ajudar você a analisar seus leads e criar estratégias comerciais.
+                    </div>
+
+                </div>
+
+                <div class="ai-input">
+
+                    <input
+                        id="aiInput"
+                        placeholder="Pergunte algo sobre seus leads..."
+                    >
+
+                    <button id="aiSendBtn" class="primary-btn">
+                        Enviar
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ADMIN -->
+        <section id="page-admin" class="page">
+
+            <div class="page-heading">
+
+                <div>
+                    <span class="eyebrow">CONTROLE</span>
+                    <h1>Painel ADM</h1>
+                    <p>Controle a operação da NEXA.</p>
+                </div>
+
+            </div>
+
+
+            <div class="admin-grid">
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <span class="eyebrow">TAREFAS</span>
+                            <h2>Criar tarefa</h2>
+                        </div>
+                    </div>
+
+                    <form id="taskForm" class="form-grid">
+
+                        <div class="field">
+                            <label>Tarefa</label>
+                            <input id="taskTitle" required placeholder="Ex: Prospectar 30 empresas">
+                        </div>
+
+                        <div class="field">
+                            <label>Responsável</label>
+
+                            <select id="taskAssignee">
+                                <option>Arthur Rodrigues</option>
+                                <option>Pietro de Jesus</option>
+                                <option>Matheus ADM</option>
+                            </select>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Prioridade</label>
+
+                            <select id="taskPriority">
+                                <option value="Alta">Alta</option>
+                                <option value="Média">Média</option>
+                                <option value="Baixa">Baixa</option>
+                            </select>
+
+                        </div>
+
+                        <div class="field">
+                            <label>Prazo</label>
+                            <input id="taskDue" type="date">
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            Criar tarefa
+                        </button>
+
+                    </form>
+
+                </div>
+
+
+                <div class="panel">
+
+                    <div class="panel-header">
+                        <div>
+                            <span class="eyebrow">META</span>
+                            <h2>Meta financeira</h2>
+                        </div>
+                    </div>
+
+                    <form id="goalForm" class="form-grid">
+
+                        <div class="field">
+                            <label>Meta mensal</label>
+                            <input id="goalTarget" type="number" min="0" step="0.01" value="5000">
+                        </div>
+
+                        <div class="field">
+                            <label>Valor atual</label>
+                            <input id="goalCurrent" type="number" min="0" step="0.01" value="0">
+                        </div>
+
+                        <button class="primary-btn" type="submit">
+                            Salvar meta
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <span class="eyebrow">SISTEMA</span>
+                        <h2>Ferramentas administrativas</h2>
+                    </div>
+                </div>
+
+                <div class="admin-actions-grid">
+
+                    <button id="clearTasksBtn" class="danger-btn">
+                        🗑 Limpar tarefas
+                    </button>
+
+                    <button id="clearCRMBtn" class="danger-btn">
+                        🗑 Limpar CRM
+                    </button>
+
+                    <button id="resetDataBtn" class="danger-btn">
+                        ⚠ Restaurar dados
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+
+<!-- TASK MODAL -->
+<div id="taskModal" class="modal">
+
+    <div class="modal-card">
+
+        <button class="modal-close" data-close-modal="taskModal">×</button>
+
+        <span class="eyebrow">NOVA TAREFA</span>
+        <h2>Criar tarefa</h2>
+
+        <form id="modalTaskForm" class="form-grid">
+
+            <div class="field">
+                <label>Tarefa</label>
+                <input id="modalTaskTitle" required>
+            </div>
+
+            <div class="field">
+                <label>Responsável</label>
+                <select id="modalTaskAssignee">
+                    <option>Arthur Rodrigues</option>
+                    <option>Pietro de Jesus</option>
+                    <option>Matheus ADM</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Prioridade</label>
+                <select id="modalTaskPriority">
+                    <option>Alta</option>
+                    <option selected>Média</option>
+                    <option>Baixa</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label>Prazo</label>
+                <input id="modalTaskDue" type="date">
+            </div>
+
+            <button class="primary-btn">
+                Criar tarefa
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- GOAL MODAL -->
+<div id="goalModal" class="modal">
+
+    <div class="modal-card">
+
+        <button class="modal-close" data-close-modal="goalModal">×</button>
+
+        <span class="eyebrow">META</span>
+        <h2>Editar meta</h2>
+
+        <form id="modalGoalForm" class="form-grid">
+
+            <div class="field">
+                <label>Meta mensal</label>
+                <input id="modalGoalTarget" type="number" min="0">
+            </div>
+
+            <div class="field">
+                <label>Valor atual</label>
+                <input id="modalGoalCurrent" type="number" min="0">
+            </div>
+
+            <button class="primary-btn">
+                Salvar
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- COPY MODAL -->
+<div id="copyModal" class="modal">
+
+    <div class="modal-card copy-modal">
+
+        <button class="modal-close" data-close-modal="copyModal">×</button>
+
+        <span class="eyebrow">NEXA AI</span>
+
+        <h2 id="copyCompanyName">Mensagem comercial</h2>
+
+        <div class="whatsapp-preview">
+
+            <div class="wa-header">
+                <span>●</span>
+                WhatsApp
+            </div>
+
+            <textarea id="copyText"></textarea>
+
+        </div>
+
+        <div class="copy-actions">
+
+            <button id="copyMessageBtn" class="primary-btn">
+                📋 Copiar mensagem
+            </button>
+
+            <button id="openWhatsAppBtn" class="whatsapp-btn">
+                💬 Abrir WhatsApp
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- LOADING -->
+<div id="loading" class="loading hidden">
+
+    <div class="spinner"></div>
+
+    <h3 id="loadingTitle">
+        Procurando empresas...
+    </h3>
+
+    <p id="loadingText">
+        Consultando Google Maps
+    </p>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>
